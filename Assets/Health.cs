@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using TMPro;
 
 // This component can be used together with the UnityEventOnTrigger-component to make a character in your game have health
 // If you don't know how to use UnityEvents, watch this video first: https://play.his.se/media/UnityEvents/0_nq9m8qin
@@ -35,6 +36,7 @@ public class Health : MonoBehaviour
     [Tooltip("Event triggered when this object dies (health is zero)")]
     [SerializeField] UnityEvent OnDie;
 
+    [SerializeField] private TMP_Text healthText;
     
 
     // Awake is called before the first frame update
@@ -59,6 +61,9 @@ public class Health : MonoBehaviour
                 invulnerabilityTimer = safeTime;
                 OnExitSafeTime?.Invoke();
             }
+            
+            healthText.text = currentHealth.ToString();
+            
         }
     }
 

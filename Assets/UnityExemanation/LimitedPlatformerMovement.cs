@@ -27,12 +27,15 @@ public class LimitedPlatformerMovement : MonoBehaviour
     
     private Rigidbody2D rb;
     private CapsuleCollider2D groundCheckCollider; 
+    
+    private Animator animator;
 
     
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         groundCheckCollider = GetComponent<CapsuleCollider2D>();
+        animator = GetComponent<Animator>();
     }
     
     void Update()
@@ -46,6 +49,7 @@ public class LimitedPlatformerMovement : MonoBehaviour
             rb.linearVelocityY = jumpForce;
         }
         jumpInput = false; // only jump once for each press of the jump-button
+        animator.SetBool("Jumping", !IsGrounded());
     }
 
     private bool IsGrounded()
